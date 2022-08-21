@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inside"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ profileForm.value.username }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="avatar">
+    <div class="fallback" *ngIf="!avatar" ></div>
+    <img [src]="avatar | image | async" *ngIf="avatar">
+  </div>
+
+
+  <form [formGroup]="profileForm">
+    <ion-item>
+      <ion-label position="stacked">Username</ion-label>
+      <ion-input formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Birthday</ion-label>
+      <ion-input type="date" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">My bio</ion-label>
+      <ion-textarea rows="5" formControlName="bio"></ion-textarea>
+    </ion-item>
+  </form>
+
+</ion-content>

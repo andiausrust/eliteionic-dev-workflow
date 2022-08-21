@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Users</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="editProfile()">
+        <ion-icon name="person-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<!-- changes for pull request -->
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users | async" [routerLink]="[user._id]">
+      <ion-avatar slot="start">
+        <img [src]="user.avatar_url | image | async" *ngIf="user.avatar_url">
+        <div class="fallback" *ngIf="!user.avatar_url"></div>
+      </ion-avatar>
+      <ion-label>
+        {{ user.username }}
+        <p>{{ user.createdAt | date:'short' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
